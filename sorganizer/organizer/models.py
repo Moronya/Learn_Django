@@ -6,13 +6,15 @@ class Tag(models.Model):
     slug = models.SlugField(max_length=30, unique = True, help_text="A label for URL config. ")
 
     def __str__(self):
-        return self.name
+        return self.name.title()
     
     class Meta:
         ordering = ['name']
 
 class Startup(models.Model):
-    name = models.CharField(max_length=60,db_index = True, help_text= 'A label for URL config. ') #when the db_index parameter is set to True, the values are automatically indexed in the database 
+    name = models.CharField(max_length=60,db_index = True)
+    slug = models.SlugField(max_length=30, unique = True,       help_text="A label for URL config. ")
+    description = models.CharField(max_length=70)
     founded_date = models.DateField("Date founded")
     contact = models.EmailField()
     website = models.URLField(max_length = 255) 
